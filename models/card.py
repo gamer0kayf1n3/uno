@@ -60,26 +60,22 @@ try:
 except ValueError as e:
     print(e)
 
-def generate_all_cards():
+def deck():
     cards = []
 
-    # Generate number cards (0-9 for each color, two copies of each except 0)
     for color in Color:
         cards.append(Card(color=color, card_type=CardTypeColored.NUMBER, number=0))
         for number in range(1, 10):
             cards.append(Card(color=color, card_type=CardTypeColored.NUMBER, number=number))
             cards.append(Card(color=color, card_type=CardTypeColored.NUMBER, number=number))
 
-    # Generate action cards (two copies for each color and type)
     for color in Color:
         for card_type in [CardTypeColored.PLUS_2, CardTypeColored.REVERSE, CardTypeColored.SKIP]:
             cards.append(Card(color=color, card_type=card_type))
             cards.append(Card(color=color, card_type=card_type))
 
-    # Generate wildcards (4 copies each)
     for wildcard in Wildcard:
         for _ in range(4):
             cards.append(Card(wildcard=wildcard))
 
     return cards
-print(generate_all_cards())
